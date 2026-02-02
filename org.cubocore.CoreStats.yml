@@ -12,7 +12,7 @@ finish-args:
   - --share=network # Required to get network stats
   - --socket=wayland
   - --socket=fallback-x11
-  - --filesystem=xdg-config # For shared config for all cubocore apps
+  - --filesystem=xdg-config:rw # For shared config for all cubocore apps
   - --filesystem=host:ro # reading sensor, hardware data
   - --talk-name=org.freedesktop.Notifications # Required for notifications
   - --system-talk-name=org.freedesktop.UDisks2 # Required to show disk info
