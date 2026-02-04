@@ -55,7 +55,7 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/cubocore/coreapps/corestats.git
-        commit: 37685f7647837ff90d5645fb5f6edf771d4d759f
+        commit: c29dda2e1f77bac1d55e109314fa4b6dac80ff68
         tag: v5.0.1
       - type: patch
         path: fix-icon-name.patch
