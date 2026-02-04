@@ -29,6 +29,9 @@ cleanup:
 modules:
   - name: libcprime
     buildsystem: cmake-ninja
+    config-opts: [
+        "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+    ]
     sources:
       - type: git
         url: https://gitlab.com/cubocore/libcprime.git
