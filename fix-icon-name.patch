@@ -1,0 +1,8 @@
+--- a/cc.cubocore.CoreStats.desktop
++++ b/cc.cubocore.CoreStats.desktop
+@@ -5,5 +5,5 @@
+ Exec=corestats
+-Icon=cc.cubocore.CoreStats
++Icon=org.cubocore.CoreStats
+ Type=Application
+ Categories=Qt;Utility;X-CSuite;

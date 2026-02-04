@@ -1,19 +1,22 @@
 app-id: org.cubocore.CoreStats
 runtime: org.kde.Platform
-runtime-version: '5.15-25.08'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 command: corestats
+rename-desktop-file: cc.cubocore.CoreStats.desktop
+rename-icon: cc.cubocore.CoreStats
+rename-appdata-file: cc.cubocore.CoreStats.metainfo.xml
 finish-args:
-  - --share=ipc
-  - --share=network # Required to show network info
-  - --socket=fallback-x11
-  - --socket=wayland
   - --device=dri
-  - --filesystem=host:ro # reading sensor info, network data
-  - --filesystem=home # For xdg-config
+  - --share=ipc
+  - --share=network # Required to get network stats
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --filesystem=home # For shared config for all cubocore apps
+  - --filesystem=host:ro # reading sensor, hardware data
+  - --talk-name=org.freedesktop.Notifications # Required for notifications
   - --system-talk-name=org.freedesktop.UDisks2 # Required to show disk info
   - --system-talk-name=org.freedesktop.UPower # Required to show battery info
-  - --talk-name=org.freedesktop.Notifications
 cleanup:
   - /include
   - /lib/cmake
@@ -32,13 +35,15 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/cubocore/libcprime.git
-        tag: v4.5.0
+        commit: 17d4c94f3be2c7f67dc757cf852f0144945c2c69
+        tag: v5.0.1
   - name: libcsys
     buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://gitlab.com/cubocore/libcsys.git
-        tag: v4.5.0
+        commit: de841ad0eb9bedda8122d98c092ba58324e048b4
+        tag: v5.0.1
   - name: lm-sensors
     buildsystem: simple
     build-commands:
@@ -49,13 +54,12 @@ modules:
         url: https://github.com/lm-sensors/lm-sensors.git
         commit: 42f240d2a457834bcbdf4dc8b57237f97b5f5854
   - name: corestats
-    post-install:
-      - install -Dp -m 644 org.cubocore.CoreStats.appdata.xml /app/share/appdata/org.cubocore.CoreStats.appdata.xml
     buildsystem: cmake-ninja
     sources:
-      - type: file
-        path: org.cubocore.CoreStats.appdata.xml
       - type: git
         url: https://gitlab.com/cubocore/coreapps/corestats.git
-        tag: v4.5.0
+        commit: c29dda2e1f77bac1d55e109314fa4b6dac80ff68
+        tag: v5.0.1
+      - type: patch
+        path: fix-icon-name.patch
 
